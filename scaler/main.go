@@ -10,9 +10,6 @@ func ScaleImage(src image.Image, scalingTechnique string, scalingFactor int) ima
 	blankImage := image.NewRGBA(image.Rect(0, 0, src.Bounds().Max.X/scalingFactor, src.Bounds().Max.Y/scalingFactor))
 
 	switch scalingTechnique {
-	case "NearestNeighbor":
-		draw.NearestNeighbor.Scale(blankImage, blankImage.Rect, src, src.Bounds(), draw.Over, nil)
-		return blankImage
 	case "ApproxBiLinear":
 		draw.ApproxBiLinear.Scale(blankImage, blankImage.Rect, src, src.Bounds(), draw.Over, nil)
 		return blankImage
@@ -23,6 +20,7 @@ func ScaleImage(src image.Image, scalingTechnique string, scalingFactor int) ima
 		draw.CatmullRom.Scale(blankImage, blankImage.Rect, src, src.Bounds(), draw.Over, nil)
 		return blankImage
 	default:
-		return blankImage // Throw error
+		draw.NearestNeighbor.Scale(blankImage, blankImage.Rect, src, src.Bounds(), draw.Over, nil)
+		return blankImage
 	}
 }
