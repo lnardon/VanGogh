@@ -14,11 +14,41 @@ import (
 func main() {
 	fmt.Println("VanGogh - An image manipulation tool written in Go.")
 	
-	info, err := os.Stat(os.Args[1])
-	isBatchOperation := err == nil && info.IsDir()
+	fileInfo, err := os.Stat(os.Args[1])
+	isBatchOperation := err == nil && fileInfo.IsDir()
+
 	if isBatchOperation {
-		// TODO: handle batch and make it work with goroutines
-		fmt.Println("Unable to handle batch operations yet.")
+		// TODO: Make it work with goroutines(parallel)
+		fmt.Println("Starting batch operation...")
+		args := os.Args
+		scalingTechnique := args[2]
+		scalingFactor, _ := strconv.Atoi(args[3])
+		files,_:= os.ReadDir((args[1]))
+
+		for _, file := range files {
+			filePath := args[1] + "/" + file.Name()
+			fileName := file.Name()
+			extension := fileName[strings.LastIndex(fileName, "."):]
+			input, _ := os.Open(filePath)
+			defer input.Close()
+			if err != nil {
+				fmt.Println("ERROR:", err)
+				return
+			}
+			
+			outputFile, _ := os.Create("output/" + fileName)
+			defer outputFile.Close()
+			
+			src, err := decoder.DecodeImage(input, extension)
+			if err != nil {
+				fmt.Println(err,"Error decoding image.")
+			}
+			
+			newImage := scaler.ScaleImage(src, scalingTechnique, scalingFactor)
+			encoder.EncodeImage(outputFile, newImage, extension)
+		}
+		fmt.Println("Finished!")
+
 	} else {
 	  args := os.Args
       input, _ := os.Open(args[1])
@@ -36,9 +66,8 @@ func main() {
         fmt.Println(err,"Error decoding image.")
       }
 
-      fmt.Println("Resizing...")
       newImage := scaler.ScaleImage(src, scalingTechnique, scalingFactor)
       encoder.EncodeImage(outputFile, newImage, extension)
-      fmt.Println("Done.")
+      fmt.Println("Finished!")
 	}
 }
