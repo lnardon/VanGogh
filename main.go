@@ -50,24 +50,24 @@ func main() {
 		fmt.Println("Finished!")
 
 	} else {
-	  args := os.Args
-      input, _ := os.Open(args[1])
-      scalingTechnique := args[2]
-      scalingFactor, _ := strconv.Atoi(args[3])
-      fileName := input.Name()[strings.LastIndex(input.Name(), "/")+1:]
-      extension := fileName[strings.LastIndex(fileName, "."):]
-      
-      defer input.Close()
-      outputFile, _ := os.Create("output/" + fileName)
-      defer outputFile.Close()
-      
-	  src, err := decoder.DecodeImage(input, extension)
-      if err != nil {
-        fmt.Println(err,"Error decoding image.")
-      }
+		args := os.Args
+		input, _ := os.Open(args[1])
+		scalingTechnique := args[2]
+		scalingFactor, _ := strconv.Atoi(args[3])
+		fileName := input.Name()[strings.LastIndex(input.Name(), "/")+1:]
+		extension := fileName[strings.LastIndex(fileName, "."):]
+		
+		defer input.Close()
+		outputFile, _ := os.Create("output/" + fileName)
+		defer outputFile.Close()
+		
+		src, err := decoder.DecodeImage(input, extension)
+		if err != nil {
+			fmt.Println(err,"Error decoding image.")
+		}
 
-      newImage := scaler.ScaleImage(src, scalingTechnique, scalingFactor)
-      encoder.EncodeImage(outputFile, newImage, extension)
-      fmt.Println("Finished!")
+		newImage := scaler.ScaleImage(src, scalingTechnique, scalingFactor)
+		encoder.EncodeImage(outputFile, newImage, extension)
+		fmt.Println("Finished!")
 	}
 }
