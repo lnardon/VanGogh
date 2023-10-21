@@ -2,6 +2,8 @@
 
 An image manipulation package written in Go.
 
+<img style="width: 600px" src="./logo.webp"></img>
+
 ## How to build
 
 Make you sure you have golang installed on your machine and run the command below on the root folder to build it
