@@ -1,8 +1,16 @@
-# Van Gogh
+<div style="display:flex; align-items:center; justify-content: center">
+    <h1 style="font-size:3.5rem; font-weight: 700">Van Gogh</h1>
+</div>
 
-An image manipulation package written in Go.
+<div style="display:flex; align-items:center; justify-content: center">
+<p style="font-size: 1.25rem; font-weight: 400">
+    An image manipulation package written in Go.
+</p>
+</div>
 
-<img style="width: 600px" src="./logo.webp"></img>
+<div style="display:flex; align-items:center; justify-content: center">
+    <img style="width: 400px" src="./logo.webp"></img>
+</div>
 
 ## How to build
 
@@ -17,23 +25,13 @@ go build
 Run the command below to run the application
 
 ```
-./VanGogh <file_path or folder_path> <scaling_technique> <scaling_factor>
+./VanGogh <file_path> <scaling_technique> <scaling_factor>
 ```
 
-#### <file_path>
+| Parameter             | Description                                       | Type    | Range/Options                                         | Default         |
+| --------------------- | ------------------------------------------------- | ------- | ----------------------------------------------------- | --------------- |
+| `<file_path>`         | Path to the image or folder the tool will modify. | String  | Any valid file/folder path                            | -               |
+| `<scaling_factor>`    | Determines how much to resize the images.         | Integer | 1 to 32                                               | -               |
+| `<scaling_technique>` | Technique to use for image scaling.               | String  | NearestNeighbor, ApproxBiLinear, BiLinear, CatmullRom | NearestNeighbor |
 
-A string of the path to the image or folder the tool will modify
-<br>
-</br>
-
-#### <scaling_factor>
-
-Int from 1 to 32 and determines how much to resize the images (E.g. 10 will resize the image to one 10 times smaller)
-<br>
-</br>
-
-#### <scaling_technique>
-
-<p>String from the options (NearestNeighbor, ApproxBiLinear, BiLinear, CatmullRom)</p>
-<p>The scaling techniques (from left to right =>) go from faster/worst_result to slower/best_result</p>
-<p>Default is Nearest Neighbor</p>
+Note: Scaling techniques progress from faster execution with potentially worse results (NearestNeighbor) to slower execution with potentially better results (CatmullRom).
