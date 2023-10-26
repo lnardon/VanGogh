@@ -3,3 +3,4 @@ test.png
 image_resized.png
 /output/*
 /test_images/*
+.bin/*
