@@ -1,14 +1,8 @@
-<div style="display:flex; align-items:center; justify-content: center">
-    <h1 style="font-size:3.5rem; font-weight: 700">Van Gogh</h1>
-</div>
+# VanGogh
 
-<div style="display:flex; align-items:center; justify-content: center">
-<p style="font-size: 1.25rem; font-weight: 400">
-    An image manipulation package written in Go.
-</p>
-</div>
+An image manipulation cli tool written in Go. Resize and convert images in the formats: jpeg, png and webp.
 
-<div style="display:flex; align-items:center; justify-content: center">
+<p style="text-align:center">
     <img style="width: 400px" src="./logo.webp"></img>
 </div>
 
@@ -22,10 +16,24 @@ go build
 
 ## How to run
 
+There are two operations available, a file conversion or a file resize
+
+#### File conversion
+
+You can convert images on/to the formats jpeg, png and webp.
+
 Run the command below to run the application
 
 ```
-./VanGogh <file_path> <scaling_technique> <scaling_factor>
+./VanGogh convert <file_path> <target_format>
+```
+
+#### File resize
+
+You can also resize images in the formats like jpeg, png and webp.
+
+```
+./VanGogh resize <file_path> <scaling_technique> <scaling_factor>
 ```
 
 | Parameter             | Description                                       | Type    | Range/Options                                         | Default         |
@@ -35,3 +43,17 @@ Run the command below to run the application
 | `<scaling_technique>` | Technique to use for image scaling.               | String  | NearestNeighbor, ApproxBiLinear, BiLinear, CatmullRom | NearestNeighbor |
 
 Note: Scaling techniques progress from faster execution with potentially worse results (NearestNeighbor) to slower execution with potentially better results (CatmullRom).
+
+### Examples
+
+The command below converts the `./logo.png` file into a `logo.webp` file
+
+```
+./VanGogh convert ./logo.png .webp
+```
+
+The command below resizes all the files in the`/assets` folder into images 2 times smaller using the best quality
+
+```
+./VanGogh resize ./assets CatmullRom 2
+```
