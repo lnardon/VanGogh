@@ -11,18 +11,16 @@ An image manipulation cli tool written in Go. Resize and convert images in the f
 Make you sure you have golang installed on your machine and run the command below on the root folder to build it
 
 ```
-go build
+go install && go build
 ```
 
 ## How to run
 
-There are two operations available, a file conversion or a file resize
+There are two operations available, a file conversion or a file resize.
 
 #### File conversion
 
 You can convert images on/to the formats jpeg, png and webp.
-
-Run the command below to run the application
 
 ```
 ./VanGogh convert <file_path> <target_format>
@@ -44,7 +42,7 @@ You can also resize images in the formats like jpeg, png and webp.
 
 Note: Scaling techniques progress from faster execution with potentially worse results (NearestNeighbor) to slower execution with potentially better results (CatmullRom).
 
-### Examples
+## Examples
 
 The command below converts the `./logo.png` file into a `logo.webp` file
 
